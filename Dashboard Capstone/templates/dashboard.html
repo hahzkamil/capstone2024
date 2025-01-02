@@ -26,12 +26,12 @@
       <div class="row g-3">
         <!-- informasi merah -->
         <div class="col-md-3">
-          <div class="card bg-danger text-white text-center p-4 mb-4" id="voltage_month">
-            <h6>Average Voltage / Month</h6>
+          <div class="card bg-danger text-white text-center p-4 mb-4" id="avg_weekly">
+            <h6>Average Usage / Week</h6>
             <h2></h2>
           </div>
-          <div class="card bg-danger text-white text-center p-4 mb-4" id="current_month">
-            <h6>Average Current / Month</h6>
+          <div class="card bg-danger text-white text-center p-4 mb-4" id="avg_month">
+            <h6>Average Usage / Month</h6>
             <h2></h2>
           </div>
           <div class="card bg-danger text-white text-center p-4 mb-4" id="energy_month">
@@ -47,81 +47,19 @@
         <!-- grafik bagian tengah -->
         <div class="col-md-6">
           <div class="row g-3">
-            <!-- grafik merah -->
-            <div class="col-6">
-              <div class="card text-center p-2">
-                <h6>Chart 1</h6>
-                <div
-                  class="chart-placeholder"
-                  style="height: 120px; background-color: #e2e3e5"
-                ></div>
-              </div>
-            </div>
-            <div class="col-6">
-              <div class="card text-center p-2">
-                <h6>Chart 2</h6>
-                <div
-                  class="chart-placeholder"
-                  style="height: 120px; background-color: #e2e3e5"
-                ></div>
-              </div>
-            </div>
             <div class="col-6">
               <div class="card text-center p-2" id="daily_energy">
                 <h6>Latest Consumption</h6>
                 <h2></h2>
               </div>
             </div>
-            <div class="col-6">
-              <div class="card text-center p-2" id="daily_apparent">
-                <h6>Daily Energy Apparent</h6>
-                <h2></h2>
-              </div>
-            </div>
-            <div class="col-6">
-              <div class="card text-center p-2" id="max_demand">
-                <h6>Maximum Demand</h6>
-                <h2></h2>
-              </div>
-            </div>
-            <div class="col-6">
-              <div class="card text-center p-2" id="daily_reactive">
-                <h6>Daily Energy Reactive</h6>
-                <h2></h2>
-              </div>
-            </div>
-            <!-- Voltage -->
-            <div class="col-12">
-              <div class="card text-center p-3">
-                <h6>Voltage</h6>
-                <div
-                  class="chart-placeholder"
-                  style="height: 100px; background-color: #e2e3e5"
-                ></div>
-              </div>
-            </div>
           </div>
         </div>
-
-        <!-- grafik bagian kanan -->
+        
         <div class="col-md-3">
-          <div class="card text-center p-3">
-            <h6>Weekly Energy Consumption</h6>
-            <div
-              class="chart-placeholder"
-              style="height: 150px; background-color: #f8d7da"
-            ></div>
-          </div>
           <div class="card text-center p-4 mt-4" id="energy_week">
             <h6>Energy Consumption / Week</h6>
             <h2></h2>
-          </div>
-          <div class="card text-center p-3 mt-4">
-            <h6>Current</h6>
-            <div
-              class="chart-placeholder"
-              style="height: 100px; background-color: #e2e3e5"
-            ></div>
           </div>
         </div>
       </div>
@@ -137,14 +75,11 @@
           fetch('http://127.0.0.1:5000/get-usage')
             .then(response => response.json())
             .then(data => {
-              document.getElementById("voltage_month").getElementsByTagName("h2")[0].innerHTML = `${data.voltage_month} V`;
-              document.getElementById("current_month").getElementsByTagName("h2")[0].innerHTML = `${data.current_month} Amp`;
+              document.getElementById("avg_weekly").getElementsByTagName("h2")[0].innerHTML = `${data.avg_weekly} GWh`;
+              document.getElementById("avg_month").getElementsByTagName("h2")[0].innerHTML = `${data.avg_monthly} GWh`;
               document.getElementById("energy_month").getElementsByTagName("h2")[0].innerHTML = `${data.energy_consumption_month} GWh`;
               document.getElementById("edel").getElementsByTagName("h2")[0].innerHTML = `${data.edel} GWh`;
               document.getElementById("daily_energy").getElementsByTagName("h2")[0].innerHTML = `${data.daily_energy_consumption} kW`;
-              document.getElementById("daily_apparent").getElementsByTagName("h2")[0].innerHTML = `${data.daily_energy_apparent} kVAH`;
-              document.getElementById("max_demand").getElementsByTagName("h2")[0].innerHTML = `${data.max_demand} kVA`;
-              document.getElementById("daily_reactive").getElementsByTagName("h2")[0].innerHTML = `${data.daily_energy_reactive} kVARH`;
               document.getElementById("energy_week").getElementsByTagName("h2")[0].innerHTML = `${data.energy_consumption_week} GWh`;
             })
             .catch(error => console.log('Error fetching data:', error));

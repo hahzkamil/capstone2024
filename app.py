@@ -13,8 +13,8 @@ def get_usage():
         usage_data = calculate_usage()  # Get the calculated data
         if usage_data:
             return jsonify({
-                "voltage_month": 220,  # Example static data, update as needed
-                "current_month": 5,  # Example static data, update as needed
+                "avg_weekly": usage_data['avg_weekly'],  # Example static data, update as needed
+                "avg_monthly": usage_data['avg_monthly'],  # Example static data, update as needed
                 "energy_consumption_month": usage_data['monthly_usage'],  # Use real data
                 "edel": usage_data['edel'],  # Example static data, update as needed
                 "daily_energy_consumption": usage_data['daily_usage'],  # Real data

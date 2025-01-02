@@ -48,23 +48,21 @@ def calculate_usage():
         weekly_usage_gwh = round(weekly_usage_kwh / 1_000_000, 6)
         monthly_usage_gwh = round(monthly_usage_kwh / 1_000_000, 6)
 
+        avg_weekly = round(weekly_usage_gwh / 7, 6)
+        avg_monthly = round(monthly_usage_gwh / 30, 6)
+
         # Print the final accumulated values for debugging
-        print(f"Daily usage: {daily_usage_gwh} GWh, Weekly usage: {weekly_usage_gwh} GWh, Monthly usage: {monthly_usage_gwh} GWh")
+        print(f"Daily usage: {daily_usage_gwh} GWh, Weekly usage: {weekly_usage_gwh} GWh, Monthly usage: {monthly_usage_gwh} GWh, avg week: {avg_weekly} GWh, avg month: {avg_monthly}")
 
         # Return the calculated values
         return {
             'daily_usage': consumption,
             'weekly_usage': weekly_usage_gwh,
             'monthly_usage': monthly_usage_gwh,
-            'voltage_month': 220,  # Example static data, replace with actual data
-            'current_month': 15,  # Example static data
-            'energy_consumption_month': monthly_usage_gwh,
+            'avg_monthly': avg_monthly,  # Example static data, replace with actual data
+            'avg_weekly': avg_weekly,  # Example static data
             'edel': daily_usage_gwh,
-            'daily_energy_consumption': daily_usage_gwh,
-            'daily_energy_apparent': 10,  # Example static data
-            'max_demand': 5,  # Example static data
-            'daily_energy_reactive': 2,  # Example static data
-            'energy_consumption_week': weekly_usage_gwh
+
         }
 
     except Exception as e:
