@@ -21,43 +21,49 @@
       </div>
     </header>
 
-    <!-- card -->
+    <!-- Card -->
     <div class="container mt-4">
-      <div class="row g-3">
-        <!-- informasi merah -->
-        <div class="col-md-3">
-          <div class="card bg-danger text-white text-center p-4 mb-4" id="avg_weekly">
+      <div class="row g-4">
+        <!-- Card Atas -->
+        <div class="col-md-4">
+          <div
+            class="card bg-danger text-white text-center p-5"
+            id="avg_weekly"
+          >
             <h6>Average Usage / Week</h6>
             <h2></h2>
           </div>
-          <div class="card bg-danger text-white text-center p-4 mb-4" id="avg_month">
+        </div>
+        <div class="col-md-4">
+          <div class="card bg-danger text-white text-center p-5" id="avg_month">
             <h6>Average Usage / Month</h6>
             <h2></h2>
           </div>
-          <div class="card bg-danger text-white text-center p-4 mb-4" id="energy_month">
-            <h6>Energy Consumption / Month</h6>
-            <h2></h2>
-          </div>
-          <div class="card bg-danger text-white text-center p-4 mb-4" id="edel">
+        </div>
+        <div class="col-md-4">
+          <div class="card bg-danger text-white text-center p-5" id="edel">
             <h6>E Del</h6>
             <h2></h2>
           </div>
         </div>
+      </div>
 
-        <!-- grafik bagian tengah -->
-        <div class="col-md-6">
-          <div class="row g-3">
-            <div class="col-6">
-              <div class="card text-center p-2" id="daily_energy">
-                <h6>Latest Consumption</h6>
-                <h2></h2>
-              </div>
-            </div>
+      <div class="row g-4 mt-3">
+        <!-- Card Bawah -->
+        <div class="col-md-4">
+          <div class="card text-center p-5" id="daily_energy">
+            <h6>Latest Consumption</h6>
+            <h2></h2>
           </div>
         </div>
-        
-        <div class="col-md-3">
-          <div class="card text-center p-4 mt-4" id="energy_week">
+        <div class="col-md-4">
+          <div class="card text-center p-5" id="energy_month">
+            <h6>Energy Consumption / Month</h6>
+            <h2></h2>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card text-center p-5" id="energy_week">
             <h6>Energy Consumption / Week</h6>
             <h2></h2>
           </div>
@@ -65,29 +71,48 @@
       </div>
     </div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
     <!-- JavaScript to Fetch Data -->
     <script>
       window.onload = function () {
         function fetchData() {
-          fetch('http://127.0.0.1:5000/get-usage')
-            .then(response => response.json())
-            .then(data => {
-              document.getElementById("avg_weekly").getElementsByTagName("h2")[0].innerHTML = `${data.avg_weekly} GWh`;
-              document.getElementById("avg_month").getElementsByTagName("h2")[0].innerHTML = `${data.avg_monthly} GWh`;
-              document.getElementById("energy_month").getElementsByTagName("h2")[0].innerHTML = `${data.energy_consumption_month} GWh`;
-              document.getElementById("edel").getElementsByTagName("h2")[0].innerHTML = `${data.edel} GWh`;
-              document.getElementById("daily_energy").getElementsByTagName("h2")[0].innerHTML = `${data.daily_energy_consumption} kW`;
-              document.getElementById("energy_week").getElementsByTagName("h2")[0].innerHTML = `${data.energy_consumption_week} GWh`;
+          fetch("http://127.0.0.1:5000/get-usage")
+            .then((response) => response.json())
+            .then((data) => {
+              document
+                .getElementById("avg_weekly")
+                .getElementsByTagName(
+                  "h2"
+                )[0].innerHTML = `${data.avg_weekly} GWh`;
+              document
+                .getElementById("avg_month")
+                .getElementsByTagName(
+                  "h2"
+                )[0].innerHTML = `${data.avg_monthly} GWh`;
+              document
+                .getElementById("energy_month")
+                .getElementsByTagName(
+                  "h2"
+                )[0].innerHTML = `${data.energy_consumption_month} GWh`;
+              document
+                .getElementById("edel")
+                .getElementsByTagName("h2")[0].innerHTML = `${data.edel} GWh`;
+              document
+                .getElementById("daily_energy")
+                .getElementsByTagName(
+                  "h2"
+                )[0].innerHTML = `${data.daily_energy_consumption} kW`;
+              document
+                .getElementById("energy_week")
+                .getElementsByTagName(
+                  "h2"
+                )[0].innerHTML = `${data.energy_consumption_week} GWh`;
             })
-            .catch(error => console.log('Error fetching data:', error));
+            .catch((error) => console.log("Error fetching data:", error));
         }
 
         // Fetch data every 5 seconds
         setInterval(fetchData, 5000);
-        fetchData();  // Initial fetch
+        fetchData(); // Initial fetch
       };
     </script>
   </body>
